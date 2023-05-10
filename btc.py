@@ -5,7 +5,6 @@ import plotly.graph_objs as go
 import yfinance as yf
 import plotly
 import plotly.express as px
-import pandas as pd
 import requests
 import re
 from datetime import date

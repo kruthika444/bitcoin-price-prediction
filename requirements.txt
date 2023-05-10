@@ -1,0 +1,8 @@
+Flask
+pandas
+cryptocompare
+yfinance
+datetime
+plotly
+numerize
+requests 
