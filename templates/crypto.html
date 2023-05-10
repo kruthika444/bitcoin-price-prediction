@@ -1,0 +1,248 @@
+{% extends 'del-01.html' %}
+{% block title %}CryptoCurrency{% endblock %}
+{% block head_section %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/crypto.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block content %}
+<div id="preloader" class="loader"> </div>
+<div class="price">
+  <section>
+  <div class="crypto-layer">
+    <article class="layer">
+      <div class="temporary_text"><img src="{{url_for('static', filename='kaz-01.jpg')}}" ></div>
+      <div class="card_content">
+          <div class="card_title"><b>CRYPTOCURRENCY </b> Cryptocurrency is a digital payment system that doesn't rely on banks to verify transactions.</div>
+              <p class="card_description">It's a peer-to-peer system that can enable anyone anywhere to send and receive payments. Instead of being physical money carried around and exchanged 
+                in the real world, cryptocurrency payments exist purely as digital entries to an online database describing specific transactions.
+                When you transfer cryptocurrency funds, the transactions are recorded in a public ledger. Cryptocurrency is stored in digital
+                wallets.<br><br>Cryptocurrency received its name because it uses encryption to verify transactions. 
+                This means advanced coding is involved in storing and transmitting cryptocurrency data between wallets and to public ledgers.
+                The aim of encryption is to provide security and safety.</p> 
+      </div>
+    </article>
+  </div>
+  </section>
+    <h1>BITCOIN VS OTHER CRYPTO</h1>
+    <section>
+      <span>(all prices are in USD)</span>
+           <form class='chart-drop-menu' name="myform" action="{{ url_for('crypto')}}" method="post">
+            <div class="custom-select">
+            <select name="chart">
+              <option value="">Select</option>
+          {% for row in row_dd %}
+            <option value={{row[0]}}>{{row[1]}} </option> 
+          {% endfor %}
+          </select></div>
+      </form>
+           <div id='chart' class='chart'”></div>
+         <div>
+        <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+        <script type='text/javascript'>
+          var graphs = {{ graph| safe}};
+          Plotly.plot('chart',graphs,{});
+        </script>
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+        </div>
+    </section>
+    <h1>CRYPTOCURRENCIES</h1>
+      <section><span>(all prices are in USD)</span>
+      <div class="FixHead"> 
+        <table class="s-table">
+            <thead>
+            <tr>{% for col in column_names %}
+            <th>{{col}}</th>
+            {% endfor %}</tr>
+          </thead>
+          <tbody>
+            {% for row in row_data %}
+            <tr>
+            {% for col, row_ in zip(column_names, row) %}
+            {% if col==img_col %}
+            <td>
+              <img class='coin' src = "{{ url_for('static', filename='colors/'+row_)}} "  width="40px" height="40px">
+            </td>
+            {% else %}
+            <td>{{row_}}</td>
+            {% endif %}
+            {% endfor %}
+            </tr>{% endfor %}
+          </tbody>
+          </table> 
+      </div>
+      </section>  
+    <h1>TOP 5 TRENDING CRYPTO</h1>  
+    <section>
+      <div class="pic-ctn">
+        {% for row in trend_row %}
+        <div class="txt">
+          <h3>{{row[5]}}.{{row[1]}}</h3>
+          <img src="{{ url_for('static', filename='colors/'+row[0])}} " alt="not avaliable" class="pic">
+            <div class="trends">
+              <table>
+                <tr>
+                  <td>{{trend_col[2]}}:</td>
+                  <td>{{row[2]}}</td>
+                </tr>
+                <tr>
+                  <td>{{trend_col[3]}}:</td>
+                  <td>{{row[3]}}</td>
+                </tr>
+                <tr>
+                  <td>{{trend_col[4]}}:</td>
+                  <td>{{row[4]}}</td>
+                </tr>
+              </table>
+            </div>
+        </div> {% endfor %}
+      </div>
+    </section>
+    <h1>INVESTMENT GUIDE ON CRYPTO IN INDIA</h1>
+    <section>
+      <div class="about-btc">
+        <p>Cryptocurrency prices are known to be extremely volatile, so investors must research well before deciding to get into it.
+          Cryptocurrencies are slowly growing recognition as a trading and investment opportunity for many people around the world. 
+          If you wish to explore crypto investment opportunities, you must factor in the price volatility in your plans. Major 
+          cryptocurrencies, such as Bitcoin and Ethereum, has saw immense highs and depressing lows on several occasions before.
+           So, all crypto investors must look at this as a long-term prospect, involving diligent research and taking informed decisions.
+          </p>
+          <p>If you are still keen on investing in crypto, check out these easy steps you can follow to begin your journey:</p>
+          <ol>
+            <li>
+              <b>Decide a crypto coin to invest in: </b>Do your research well. Check out the price movements of different cryptocurrencies
+               on different tracking platforms such as CoinMarketCap and others. You can also speak to reliable experts to help make a 
+               decision. Once you have taken an informed decision on which crypto to invest in, everything else becomes relatively simpler.
+              
+            </li>
+            <li>
+              <b>Choose a crypto exchange: </b>Cryptocurrency exchanges are online trading platforms that let you buy and sell crypto coins.
+               As a beginner, it’s best to invest via a trading platform as it ensures more security than buying from a standalone trader.
+                There are several crypto exchanges to choose from in India, from CoinSwitch Kuber to WazirX. Each platform will offer its 
+                own set of perks, including lesser minimum investment amount, number of cryptocurrencies offered, affordable maker and taker fees, and so on. 
+              Once you have chosen an exchange of your choice, all you need to do is get a deposit address from the platform. Once you get 
+              that, you are ready to invest.              
+            </li>
+            <li>
+              <b>Choose a payment option: </b>Before you buy a crypto coin, you need to add money to your fund to enable purchases. You can
+               add funds via UPI, net banking, bank transfers, or even a cryptocurrency wallet. Different crypto exchanges will charge 
+               different transaction fees for certain payment options. So, it’s highly advised that you research well before going ahead.
+            </li>
+            <li>
+              <b>Buy cryptocurrency: </b>This step is fairly straightforward. Once you have logged into a crypto platform and added funds,
+               you will see all the cryptocurrencies a platform has to offer. There should be a Buy option on your screen for each 
+               cryptocurrency. All you need to do is click on that and make your purchase.
+            </li>
+            <li>
+              <b>Store securely: </b>This is probably the most important step to ensure your crypto assets are properly secured.
+               While most exchanges will offer an online wallet option, some investors find it too risky as staying connected to the 
+               Internet means your account is open to possible hacks. 
+            </li>
+          </ol>
+          <p>To safely secure your assets, it is highly advised to use cold storage, which allows you to save your coins offline. 
+            Keep in mind that if you use a third-party cold wallet to save your assets, you may have to pay a minor withdrawal fee 
+            to transfer your crypto coins to a wallet of your choice.<br>
+            These are the simple steps to follow when investing in crypto. Once you decide to sell your cryptocurrencies, all you need to do is head back to the crypto exchange, and click on a Sell option. You can either decide to sell off all your assets at once, or only a part of your total holdings. It’s best to read the market conditions well before deciding to sell or hold.
+            </p>
+    </section>
+</div>
+
+<script>
+  var loader = document.getElementById('preloader');
+  window.addEventListener('load',function(){
+    loader.style.display='none';
+  })
+</script>
+
+<script>
+  var x, i, j, l, ll, selElmnt, a, b, c;
+/* Look for any elements with the class "custom-select": */
+x = document.getElementsByClassName("custom-select");
+l = x.length;
+for (i = 0; i < l; i++) {
+  selElmnt = x[i].getElementsByTagName("select")[0];
+  ll = selElmnt.length;
+  /* For each element, create a new DIV that will act as the selected item: */
+  a = document.createElement("DIV");
+  a.setAttribute("class", "select-selected");
+  a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+  x[i].appendChild(a);
+  /* For each element, create a new DIV that will contain the option list: */
+  b = document.createElement("DIV");
+  b.setAttribute("class", "select-items select-hide");
+  for (j = 1; j < ll; j++) {
+    /* For each option in the original select element,
+    create a new DIV that will act as an option item: */
+    c = document.createElement("DIV");
+    c.innerHTML = selElmnt.options[j].innerHTML;
+    c.addEventListener("click", function(e) {
+        /* When an item is clicked, update the original select box,
+        and the selected item: */
+      
+        var y, i, k, s, h, sl, yl;
+        s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+        sl = s.length;
+        h = this.parentNode.previousSibling;
+        for (i = 0; i < sl; i++) {
+          if (s.options[i].innerHTML == this.innerHTML) {
+            s.selectedIndex = i;
+            h.innerHTML = this.innerHTML;
+            y = this.parentNode.getElementsByClassName("same-as-selected");
+            yl = y.length;
+            for (k = 0; k < yl; k++) {
+              y[k].removeAttribute("class");
+            }
+            this.setAttribute("class", "same-as-selected");
+            break;
+          }
+        }
+        h.click();
+        myform.submit()
+    });
+    b.appendChild(c);
+  }
+  x[i].appendChild(b);
+  a.addEventListener("click", function(e) {
+    /* When the select box is clicked, close any other select boxes,
+    and open/close the current select box: */
+   
+    e.stopPropagation();
+    closeAllSelect(this);
+    this.nextSibling.classList.toggle("select-hide");
+    this.classList.toggle("select-arrow-active");
+  });
+}
+
+function closeAllSelect(elmnt) {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}
+
+/* If the user clicks anywhere outside the select box,
+then close all select boxes: */
+document.addEventListener("click", closeAllSelect);
+</script>
+
+{% endblock %}

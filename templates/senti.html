@@ -1,0 +1,139 @@
+{% extends 'del-01.html' %}
+{% block title %}Sentiment{% endblock %}
+{% block head_section %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="price">
+    <h1>SENTIMENT ANALYSIS</h1>
+    <section>
+        <div class="about-btc">
+        <div class="img-around">
+          <img src="{{url_for('static', filename='sentiment.png')}}" style="float: right;" height="180px" width="250px">
+        </div>
+        <p>Sentiment analysis can be used to determine investor's opinions of a specific crypto currency or asset. 
+          Sentiment may at times hint at future price action. This is also an example of how trading psychology can
+           affect a market, assisting as a forecasting tool to determine possible future price changes in a particular asset.
+           There are various factors that influence crypto sentiment, which include news (economic, political and industry related)
+          and social media. These factors help influence crypto sentiment as they impact crypto market volatility, trading volume 
+          and company earnings.
+        </p>
+        <h3>Is it important to analyse sentiment in the Crypto market? </h3>
+        <p>
+            Investment in the Crypto market is always about the right timing. Buying or selling at the right time can gain you profits. And analysing market sentiment in the cruptocurrency market will help you understand the market’s mood and whether it is the right time to buy or sell a crypto coins.
+        </p>
+        <h3>How to conduct bitcoin  sentiment analysis?</h3>
+        <p>
+            <ol>
+                <li>Collect data related to Bitcoin, such as investor's reviews, texts including public sentiment, tweets mentioning bitcoin, etc.</li>
+                <li>Gather historical price changes of Bitcoin.</li>
+                <li>Clean the dataset to get rid of the unrelated items.</li>
+                <li>Label the content in the dataset based on emotional tone as either negative, positive, or neutral, either manually or using automated tools.</li>
+                <li>Train your model with a labeled dataset.</li>
+                <li>Evaluate the performance of your model.</li>
+            </ol>
+        </p>
+        <span id="dots1"></span><span id="more1">
+        <h3>Social Media Impact on the Cryptocurency</h3>
+        <div class="img-around">
+          <img src="{{url_for('static', filename='twiiter-btc.png')}}" style="float: left;" height="150px" width="330px">
+        </div>
+        <p>Even though cryptocurrencies is starting to see mainstream adoption, social media still has a prominent role. As well as growing the cryptocurrency space, social media is beginning to educate people on blockchain technology and the impact it can have on all industries. If you wish to be updated with news in the blockchain and cryptocurrency space, you must turn to social media. In particular, Reddit is exceptionally active in Bitcoin; the Bitcoin subreddit will teach you everything you need to know on the topic. When you read breaking cryptocurrency news, journalists probably pulled the information from Reddit.</p>
+        <p>Social media will continue to drive up interest and adoption in cryptocurrency and blockchain. Even further, blockchain technology could be responsible for entirely decentralized social media. If this happens, the public will run the platform, and there will be no censorship on what can be posted. Blockchain social media would spell the epitome of the relationship between the two.</p>
+        <p>Cryptocurrency is here to stay, and social media is responsible for driving up interest and launching it into the mainstream. The relationship outlined above will continue to shift and evolve as time moves on.</p>
+    </span>
+    <button class="custom-btn btn-1" onclick="myFunction1()" id="myBtn1">Read more</button>    
+    </div>
+    </section>
+    <script>
+        function myFunction1() {
+          var dots = document.getElementById("dots1");
+          var moreText = document.getElementById("more1");
+          var btnText = document.getElementById("myBtn1");
+        
+          if (dots.style.display === "none") {
+            dots.style.display = "inline";
+            btnText.innerHTML = "Read more";
+            btnText.style.margin='auto'
+            moreText.style.display = "none";
+          } else {
+            dots.style.display = "none";
+            btnText.innerHTML = "Read less"; 
+            btnText.style.marginLeft="45%"
+            moreText.style.display = "inline";
+          }
+        }
+        </script>
+        <h1>SENTIMENT vs PRICE</h1>
+        <section>
+            <div id='chart' class='chart'></div>
+            <div>
+           <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+           <script type='text/javascript'>
+             var graphs = {{ senti| safe}};
+             Plotly.plot('chart',graphs,{});
+           </script>
+           <script>
+               if ( window.history.replaceState ) {
+                   window.history.replaceState( null, null, window.location.href );
+               }
+           </script>
+           </div>
+        </section>
+        
+        <h1>SENTIMENT CLASSFICATION</h1>
+        <section>
+          <div class="plan leftp">
+            <div id='chart-1' class='plot'”></div>
+            <div>
+           <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+           <script type='text/javascript'>
+             var graphs1 = {{ twt| safe}};
+             Plotly.plot('chart-1',graphs1,{});
+           </script>
+           </div>
+           <p>In the overall analysis of tweets from 2020 to 2023: 46% of tweets are of neutral, 36% of tweets are positive and 16% of tweets are negative. As you can see the negativity towards bitcoin is much lesser and it mostly stayed neutral among peoples and traders.</p>
+          </div>
+          <div class="plan rightp">
+            <div id='chart-2' class='plot'”></div>
+            <div>
+           <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+           <script type='text/javascript'>
+             var graphs2 = {{ year_twt| safe}};
+             Plotly.plot('chart-2',graphs2,{});
+           </script>
+           </div>
+           <p>Bitcoin is the most tweeted in the year of 2023: BTC accounted for 39.8% of all years in 2023,17.7% in 2022, and 24.2% in 2021. As you can see, in 2021 influencers tweeted about coins more often than in 2022. It's too early to draw conclusions about 2023, since we've analysed the data for only 4 months of the current year. </p>
+          </div>
+          </section>
+          <br><br><br>
+        <h1>TWEET FREQUENT WORDS</h1>
+        <section>
+          <div class="plan leftp">
+            <div id='chart-3' class='plot'”></div>
+            <div>
+           <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+           <script type='text/javascript'>
+             var graphs3 = {{ pos| safe}};
+             Plotly.plot('chart-3',graphs3,{});
+           </script>
+           </div>
+          </div>
+          <div class="plan rightp">
+            <div id='chart-4' class='plot'”></div>
+            <div>
+           <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+           <script type='text/javascript'>
+             var graphs4 = {{ neg| safe}};
+             Plotly.plot('chart-4',graphs4,{});
+           </script>
+           </div>
+          </div>
+        </section>
+</div>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

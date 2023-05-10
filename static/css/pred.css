@@ -1,0 +1,280 @@
+
+.pred{
+    align-items: center;
+    margin-left:auto; 
+    margin-right:auto;
+    padding-left: 25%;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+.card {
+   margin: 20px;
+    float: left;
+  position: relative;
+  width: 320px;
+  height: 120px;
+  background: #f6ac51;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: justify;
+  font-size: 25px;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.card::before,
+.card::after {
+  position: absolute;
+  content: "";
+  width: 20%;
+  height: 20%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 25px;
+  font-weight: bold;
+  background-color: #ea8b19;
+  transition: all 0.5s;
+  
+}
+.card::before {
+  top: 0;
+  right: 0;
+  border-radius: 0 15px 0 100%;
+}
+
+.card::after {
+  bottom: 0;
+  left: 0;
+  border-radius: 0 100%  0 15px;
+}
+
+.card:hover::before,
+.card:hover:after {
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  transition: all 0.5s;
+  
+  box-shadow: 0 4px 8px 5px #f6ac51;
+}
+
+.card:hover:after {
+  content: attr(data-after-content)
+}
+
+
+.pred-table tbody{
+    overflow: auto;
+    display: block;
+}
+.pred-table { 
+    padding: 5px;
+    margin-left:auto; 
+    margin-right:auto;
+    border-collapse: collapse;
+    font-size: 20px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    box-shadow: 0 5px 5px #ffffffa2;
+}
+.pred-table thead tr {
+    background-color: #ea8b19;
+    color: #ffffff;
+    text-align: left;
+   display: block;
+}
+.pred-table th{
+    text-transform: uppercase;
+}
+.pred-table th,
+.pred-table td {
+    width:130px;
+    text-align: center;
+    padding: 12px 15px;
+}
+.pred-table tbody tr {
+    border-bottom: 1px solid #dddddd;
+
+}
+.pred-table tbody tr:nth-of-type(even) {
+    background-color: rgb(17,17,17);
+    color: white;
+}
+.pred-table tbody tr:nth-of-type(even):hover,
+.pred-table tbody tr:hover{
+background-color: #f6ac51;
+color: black;
+font-size: 22px;
+}
+.pred-table tbody tr:last-of-type {
+    border-bottom: 2px solid #ea8b19;
+}
+
+.pred-table tbody tr.active-row {
+    font-weight: bold;
+    color: #ea8b19;
+}
+.tab-conv{
+    float: left;
+    padding: 15px;
+    height: 400px;
+}
+.lf{
+    width: 95%;
+}
+.rig{
+    font-size: 18px;
+    align-content: center;
+    text-align: center;
+    margin-left: -25%;
+    width:20%;
+    height: 30%;
+    margin-top: 5%;
+    margin-bottom: auto;
+}
+.rig img:hover{
+    height: 220px;
+    width: 220px;
+}
+.col4,
+.col3{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px;
+}
+.col3-left{
+    flex-basis: 10%;
+    left:-10px;
+    padding-right: 10px;
+}
+.col4-right{
+    padding: 5px;
+    padding-left: 20px;
+    flex-basis:15%;   
+}
+.model {
+    width: 45%;
+    height:370px;
+    margin: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 0 0 300px inset, 0 0 5px grey;
+    transition: box-shadow 1s;
+    float: left;
+    margin: 10px;
+}
+.model::after {
+    width: 90%;
+    height: 90%;
+    display: block;
+    white-space: pre;
+    font-size: 22px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    color: white;
+    border: 2px solid;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 1s .5s;
+}
+.model:hover {
+    box-shadow: 0 0 0 5px inset, 0 0 5px grey, 0 0 10px grey inset;
+    transition: box-shadow 1s;
+}
+.model:hover::after {
+    opacity: 0;
+    transition: opacity .5s;
+}
+#arima {
+    background-image: url(/static/arima.png);
+    height:370px;
+    width:45%;
+    background-size:100%;
+    background-repeat: no-repeat;
+    color: rgba(0, 0, 0, 0.87);
+}
+#arima::after {
+    content: 'Auto Regressive Integrated Moving Average';
+}
+#linear {
+    background-image: url(/static/linear-reg.png);
+    height:370px;
+    width:45%;
+    background-size:100%;
+    background-repeat: no-repeat;
+    color: rgba(0, 0, 0, 0.87);
+}
+#linear::after {
+    content: 'Linear Regression';
+}
+#lstm {
+    background-image: url(/static/lstm.png);
+    height:370px;
+    width:45%;
+    background-size:100%;
+    background-repeat: no-repeat;
+    color: #ea8c19e0;
+}
+#lstm::after {
+    content: 'Long Short Term Memory'
+}
+#avg {
+    background-image: url(/static/moving-avg.png);
+    height:370px;
+    width:45%;
+    background-size:100%;
+    background-repeat: no-repeat;
+    color:rgba(0, 0, 0, 0.87);
+}
+#avg::after {
+    content: 'Simple Moving Average'
+}
+#wrapper {
+    width:100%;
+    height: 800px;
+    justify-content: center;
+    align-items: center;
+    margin: 50px;
+}
+.img-around img{
+    -webkit-filter: drop-shadow(5px 3px 0 #ea8b19)
+                    drop-shadow(-3px -3px 0 #ea8b19);
+    filter: drop-shadow(2px 1px 0 #ea8b19) 
+            drop-shadow(-1px -1px 0 #ea8b19);
+    filter: drop-shadow(0 0 0.55rem #ea8b19);
+    margin: 5px;
+  }
+
+  
+.plan{
+    float: left;
+    height: 600px;
+    margin-bottom: 50px;
+}
+.leftp,.rightp{
+    width: 47%;
+    margin-left: 30px;
+    background-color: rgb(17,17,17);
+    border-radius: 10px;
+    border: 1px solid #ea8b19;
+    box-shadow: 0 0 5px 5px #ea8c1966;
+}
+.leftp p,
+.rightp p{
+    text-align: justify;
+    align-items: center;
+    font-size: 18px;
+    padding:0px 50px 0px 50px;
+}
+
+.plot{
+    align-items: center;
+    padding: 10px;
+    padding-right: 15px;
+    border-radius: 10px;
+}
+

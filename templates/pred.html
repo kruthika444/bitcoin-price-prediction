@@ -1,0 +1,106 @@
+{% extends 'del-01.html' %}
+{% block title %}Prediction{% endblock %}
+{% block head_section %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pred.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="price">
+    <h1>PREDICTED CLOSE PRICE</h1>
+    <section>
+        <div class="pred">
+        <div class="card" data-after-content=&#x20B9;{{today}}>Today's <br>({{today_date}})</div>
+	    <div class="card" data-after-content=&#x20B9;{{tmro}}>Tomorrow's<br>({{tmro_date}})</div>
+        </div>
+        <br><br><br> <br><br><br>
+    </section>
+    <h1>PREDICTED GRAPH</h1>
+    <section>
+        <div id='chart' class='chart'”></div>
+        <div>
+       <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+       <script type='text/javascript'>
+         var graphs = {{ graphJSON| safe}};
+         Plotly.plot('chart',graphs,{});
+       </script>
+       <script>
+           if ( window.history.replaceState ) {
+               window.history.replaceState( null, null, window.location.href );
+           }
+       </script>
+       </div>
+    </section>
+    <h1>PREDICTED PRICE FOR A WEEK</h1>
+    <section>
+        <span>(all prices are in INR)</span>
+        <div class="tab-conv lf">
+            <table class="pred-table">
+            <thead>
+            <tr>{% for col in week_c %}
+            <th>{{col}}</th>
+            {% endfor %}</tr>
+          </thead>
+          <tbody>
+            {% for row in week_r %}
+            <tr>
+            {% for col, row_ in zip(week_c, row) %}
+            <td>{{row_}}</td>
+            {% endfor %}
+            </tr>{% endfor %}
+            </tbody>
+            </table>
+          </div>
+          <div class="tab-conv rig">
+            <p>Convert Currencies</p>
+            <a href="{{ url_for('convert')}}"><img src="{{url_for('static', filename='kaz.jpg')}}" height="200px" width="200px"></a>
+          </div>
+
+    </section><br>
+    <h1>PRICE PREDICTION METHODS</h1>
+    <section>
+        <div class="about-btc">
+        <ul style="list-style-type: none;">
+                       
+            <div class="col4">
+                <li>
+                    We have used live data of bitcoin price and other cryptocurrency data. Sentiment towards bitcoin is analysis with twitter data on bitcoin hastage for the past two years. </li>
+                <div class="col4-right">
+                <img src="{{url_for('static', filename='data.png')}}" height="100px" width="100px">
+                </div>
+            </div>
+            <div class="col3">
+                <div class="col3-left">
+                    <img src="{{url_for('static', filename='analysis.png')}}" height="100px" width="100px">
+                </div>
+                <li>Basic instruments of technical analysis. The forecast relies on basic technical indicators. The analysis was performed mostly on medium and long-term time frames for more accurate results.
+                </li>
+            </div>
+            <div class="col4">
+                <li>Every minute, the various exchanges are queried for their most recent market data. All data is run through several data cleaning and verification algorithms to ensure data integrity
+                </li><div class="col4-right">
+                <img src="{{url_for('static', filename='update.png')}}" height="100px" width="100px">
+                </div>
+            </div>
+            <div class="col3">
+                <div class="col3-left">
+                    <img src="{{url_for('static', filename='algo.png')}}" height="100px" width="100px">
+                </div>
+                <li>LTSMs are a type of Recurrent Neural Network for learning long-term dependencies. It is commonly used for processing and predicting time-series data which has been used in this website.
+                </li>
+            </div>
+          
+
+        </ul>
+        </div>
+    </section>
+    <h1>MODEL PERFORMANCE</h1>
+    <div id="wrapper">
+        <div id="arima" class="model"></div>
+        <div id="linear" class="model"></div>
+        <div id="lstm" class="model"></div>
+        <div id="avg" class="model"></div>
+      </div>
+    </div>
+{% endblock %}

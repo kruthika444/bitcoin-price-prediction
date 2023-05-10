@@ -1,0 +1,280 @@
+{% extends 'del-01.html' %}
+{% block title %}HOME{% endblock %}
+{% block head_section %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+{% block content %}
+<div class="price">
+  <h1>BITCOIN CURRENT PRICE</h1>
+  <section>
+    <span>(all prices are in INR)</span>
+    <table class="live-table">
+      <thead>
+      <tr>{% for col in column_names %}
+      <th>{{col}}</th>
+      {% endfor %}</tr>
+    </thead>
+    <tbody>
+      {% for row in row_data %}
+      <tr>
+      {% for col, row_ in zip(column_names, row) %}
+      <td>{{row_}}</td>
+      {% endfor %}
+      </tr>{% endfor %}
+    </tbody>
+    </table> 
+  </section>
+  
+  <h1>GRAPHS</h1>
+  <section>
+      <form class='chart-drop-menu' name="myform" action="{{ url_for('home')}}" method="post"> 
+        
+        <input onchange="myform.submit()" type="radio" id="norm" name="chart" value="1" {{rad1}}>
+        <label class="radio" for="norm">Normal</label>
+        
+        <input onchange="myform.submit()" type="radio" id="cand" name="chart" value="2" {{rad2}}>
+        <label class="radio" for="cand">CandleStick</label><br>
+      </form><br>
+    
+      <div id='chart' class='chart'”></div>
+    
+       <div>
+      <script src='https://cdn.plot.ly/plotly-latest.min.js'></script>
+      <script type='text/javascript'>
+        var graphs = {{ graphJSON| safe}};
+        Plotly.plot('chart',graphs,{});
+      </script>
+      <script>
+          if ( window.history.replaceState ) {
+              window.history.replaceState( null, null, window.location.href );
+          }
+      </script>
+      </div>
+      </section>
+      <h1>BITCOIN PRICE FOR PAST 15DAYS</h1>
+      <section>
+      <div class="tableFixHead">
+        <table class="styled-table">
+        <thead>
+        <tr>{% for col in head_c %}
+        <th>{{col}}</th>
+        {% endfor %}</tr>
+      </thead>
+      <tbody>
+        {% for row in head_r %}
+        <tr>
+        {% for col, row_ in zip(head_c, row) %}
+        <td>{{row_}}</td>
+        {% endfor %}
+        </tr>{% endfor %}
+        </tbody>
+        </table>
+      </div></section>
+      <h1>ABOUT BITCOIN</h1>
+      <section>
+        <div class="about-btc">
+        <div class="col-1">
+        <p>
+          Bitcoin is a form of digital currency that aims to disregard the need for central authorities such as banks or governments.
+           Instead, Bitcoin uses blockchain technology to support peer-to-peer transactions between users on a decentralized network.
+          Transactions are authenticated through Bitcoin’s proof-of-work consensus mechanism, which rewards cryptocurrency miners for validating 
+          transactions.Launched in 2009 by a mysterious developer known as Satoshi Nakamoto, Bitcoin (BTC) was the first,
+          and remains the most valuable, contributor in the emerging class of assets known as cryptocurrencies.
+        </p><div class="btc-right"> 
+          <img src="{{url_for('static', filename='bitcoin-def.avif')}}" height="200px" width="250px">
+        </div></div>
+        <h3>Working of Bitcoin:</h3>
+        <p>
+          Each Bitcoin is a digital asset that can be stored at a cryptocurrency exchange or in a digital wallet. Each individual coin represents the value of Bitcoin’s current price, but you can also own partial shares of each coin. The smallest denomination of each Bitcoin is called a Satoshi, sharing its name with Bitcoin’s creator. Each Satoshi is equivalent to a hundred millionth of one Bitcoin, so owning fractional shares of Bitcoin is quite common.
+        </p>
+        <ul>
+          <li>
+            <b>Blockchain:</b> Bitcoin is powered by open-source code known as blockchain, which creates a shared public history of 
+            transactions organized into "blocks" that are "chained" together to prevent tampering. This technology creates a permanent
+             record of each transaction, and it provides a way for every Bitcoin user to operate with the same understanding of who owns 
+             what.
+          </li>
+          <li>
+            <b>Private and public keys:</b> A Bitcoin wallet contains a public key and a private key, which work together to allow 
+            the owner to initiate and digitally sign transactions. This cracks the central function of Bitcoin — securely transferring
+             ownership from one user to another.
+          </li>
+          <li>
+            <b>Bitcoin mining:</b> Users on the Bitcoin network verify transactions through a process known as mining, which is designed
+             to confirm that new transactions are dependable with other transactions that have been completed in the past. This ensures 
+             that you can’t spend a Bitcoin you don’t have, or that you have previously spent.
+          </li>
+        </ul>
+        <h3>Bitcoin making Money:</h3>
+        <div class="col-2">
+          <div class="btc-left"> 
+            <img src="{{url_for('static', filename='mining.avif')}}" height="220px" width="250px">
+          </div>
+        <p>
+          New Bitcoins are created as part of the Bitcoin mining process, in which they are offered as a worthwhile reward to people who 
+          operate computer systems that help to validate transactions. Bitcoin miners — also known as "nodes" — are the owners of high 
+          speed computers which independently confirm each transaction, and add a completed "block" of transactions to the ever-growing
+          "chain." The resulting blockchain is a complete, public and permanent record of every Bitcoin transaction.Miners are then paid 
+          in Bitcoin for their efforts, which incentivizes the decentralized network to independently verify each transaction.
+          This independent network of miners also decreases the chance for fraud or false information to be recorded, as the majority
+          of miners need to confirm the authenticity of each block of data before it's added to the blockchain in a process known as 
+          proof-of-work.
+        </p></div>
+        <span id="dots1"></span><span id="more1">
+        <h3>Bitcoin pros:</h3>
+        <div class="col-1"><p>
+        <ul>
+          <li>
+            <b>Cost-efficient transactions and fast speeds.</b>Once you own Bitcoin, you can make transfers anytime, anywhere, reducing 
+            the time and potential expense of any transaction.
+          </li>
+          <li>
+            <b>Privacy.</b>Transactions don’t contain personal information, such as a name or credit card number. While it’s still 
+            possible to link a certain person to a certain wallet, transactions are generally more private than credit card transactions,
+             for example.
+          </li>
+          <li>
+            <b>Decentralization.</b>After the financial crisis and the Great Downturn, some investors are eager to embrace an alternative,
+             decentralized currency — one that is essentially outside the control of regular banks, governing authorities or other third
+              parties.
+          </li>
+          <li>
+            <b>Growth potential.</b>Some investors who buy and hold the currency are betting that once Bitcoin matures, greater trust 
+            and more widespread use will follow, and therefore Bitcoin’s value will grow.
+          </li>
+        </ul></p><div class="btc-right"> 
+          <img src="{{url_for('static', filename='btc-money.avif')}}" height="230px" width="260px" >
+        </div></div><br>
+        <h3>Bitcoin cons:</h3>
+        <div class="col-2">
+          <div class="btc-left"> 
+            <img src="{{url_for('static', filename='btc-lose.avif')}}" height="220px" width="250px">
+          </div>
+        <ul>
+          <li>
+            <b>Price volatility.</b>While Bitcoin's value has risen dramatically over the years, buyers' fortunes have varied widely 
+            depending on the timing of their investment. Those who bought in 2017 when Bitcoin’s price was racing toward $20,000, for 
+            example, had to wait until December 2020 to recover their losses. More recently, Bitcoin’s price began 2022 slightly over 
+            $47,000 per coin. After a tough year for cryptocurrency in general, Bitcoin has slumped to its current price of just under
+             $17,000.
+          </li>
+          <li>
+            <b>Hacking concerns.</b>While backers say the blockchain technology behind Bitcoin is even more secure than traditional 
+            electronic money transfers, there have been a number of high-profile hacks. In May 2019, for instance, more than $40 million 
+            in Bitcoin was stolen from several high-net-worth accounts on the cryptocurrency exchange Binance.
+          </li>
+        </ul></div></span>
+        <button class="custom-btn btn-1" onclick="myFunction1()" id="myBtn1">Read more</button>
+        </div>
+        
+        <script>
+          function myFunction1() {
+            var dots = document.getElementById("dots1");
+            var moreText = document.getElementById("more1");
+            var btnText = document.getElementById("myBtn1");
+          
+            if (dots.style.display === "none") {
+              dots.style.display = "inline";
+              btnText.innerHTML = "Read more";
+              btnText.style.margin='auto'
+              moreText.style.display = "none";
+            } else {
+              dots.style.display = "none";
+              btnText.innerHTML = "Read less"; 
+              btnText.style.marginLeft="45%"
+              moreText.style.display = "inline";
+            }
+          }
+          </script>
+      </section>
+      <h1> BITCOIN PRICE PREDICTION - FAQ's</h1>
+      <section>
+
+        <div style="visibility: hidden; position: absolute; width: 0px; height: 0px;">
+          <svg xmlns="http://www.w3.org/2000/svg">
+            <symbol viewBox="0 0 24 24" id="expand-more">
+              <path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+            <symbol viewBox="0 0 24 24" id="close">
+              <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/><path d="M0 0h24v24H0z" fill="none"/>
+            </symbol>
+          </svg>
+        </div>
+        
+        <details>
+
+          <summary>
+            What will Bitcoin be worth in 2023?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>Giving longer-term price targets for bitcoin in 2030, DigitalCoinPrice, as of 6 April 2023, suggested that the 
+            coin could trade at an average price of $287,317.30 in 2030. While the algorithmic forecaster did not provide a
+             bitcoin price prediction for 2040 or 2050, it did forecast that the coin could be worth $536,353.44 in 2032.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            What will bitcoin price be in five years time?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>No one really knows. DigitalCoinPrice suggested it could be worth $150,599.16 in 2028, while Telegaon predicted a
+            potential $124,750.16 and PricePrediction claimed it could trade at $252,816.76 in five years time. However, price
+             predictions very often turn out to be wrong and prices can, and do, go down as well as up. 
+         </p>
+        </details>
+        
+        <details>
+        
+          <summary>
+            Will Bitcoin ever hit $100K?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>According to Telegaon’s prediction as of 23 March 2023, bitcoin could trade at $175,109.22 in 2030, and more than double 
+            by 2040 to a potential average of $353,429.23. These forecasts however can be wrong as they are based on the historical 
+            performance of the coin, which doesn’t guarantee future returns. Always conduct your own research, remember prices can go 
+            down as well as up, and never invest more money than you can afford to lose. 
+          </p>
+        </details>
+        
+        <details>
+          <summary>
+            How much should I invest in Bitcoin?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>
+            It is advisable to invest between 5% and 30% of your investment capital according to experts or analyses. 10% is
+             taken as the best bet for starters who do not understand Bitcoin, how it works, what affects its price, and/or 
+             trading and holding strategies. 30% will be an aggressive percentage for investors.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            Why Bitcoin halving is done?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>Bitcoin halving ensures that the amount of bitcoin that can be mined with each block decreases, making bitcoin more scarce and ultimately more valuable.
+          </p>
+        </details>
+
+        <details>
+          <summary>
+            When is the next Bitcoin halving?
+            <svg class="control-icon control-icon-expand" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#expand-more" /></svg>
+            <svg class="control-icon control-icon-close" width="24" height="24" role="presentation"><use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#close" /></svg>
+          </summary>
+          <p>The Bitcoin halving takes place once every four years or every 210,000 blocks. The next Bitcoin halving is expected to take place in April 2024.
+          </p>
+        </details>
+      </section>
+
+  
+</div>
+{% endblock %}

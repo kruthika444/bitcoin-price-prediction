@@ -1,0 +1,173 @@
+{% extends 'del-01.html' %}
+{% block title %}Convertor{% endblock %}
+{% block head_section %}
+{{ super() }}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/crypto.css') }}">
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+
+{% endblock %}
+
+{% block content %}
+<div class="price">
+  
+  <h1>CRYPTOCURRENCY CONVERTOR</h1>
+    <section>
+        <div class="r-grid">
+            <div class="wrapper">
+                <form  class='chart-drop-menu' name="crypto-form" action="{{ url_for('convert')}}" method="post">
+                    <p>Enter Amount</p>
+                    <input onchange="myform.submit()" type="text" name="money" autocomplete="off" value="{{amount}}" placeholder="{{amount}}">
+                  
+                  <div class="drop-list" style="width: 200px;">
+                    <div class="from">
+                      <p>From</p>
+                      <div class="custom-select">
+                        <select onchange="myform.submit()"   id="base" name="base">
+                          <option value="{{base}}">{{base}}</option>
+                           {% for row in row_dd %}
+                           <option value={{row[1]}}>{{row[0]}} </option> 
+                           {% endfor %}
+                        </select>
+                      </div>
+                      </div>
+                    <button class="icon" type="submit" onclick="myform.submit()">
+                        <div class="icon"><img src="{{url_for('static', filename='right.png')}}" height="50px" width="50px"></div>
+                    </button> 
+                    <div class="to">
+                      <p>To</p>
+                      <div class="custom-select">
+                      <select onchange="myform.submit()"  id="to" name="to">
+                        <option value="{{to}}">{{to}}</option>
+                        {% for row in row_dd %}
+                          <option value={{row[1]}}>{{row[0]}} </option> 
+                        {% endfor %}
+                    </select></div>
+                    </div>
+                  </div>
+                </form>
+                <div class='result'>{{amount}} {{base}} = <b>{{crypto}}</b> {{to}}</div>
+              </div>
+        <script>
+            if ( window.history.replaceState ) {
+                window.history.replaceState( null, null, window.location.href );
+            }
+        </script>
+    </section>
+    <div class="about-crypto">
+      <p>
+        Rates of our Cryptocurrency convertor is based on the data provided by ExchangeRates API. The General rates aren't designed to be used for investment purpose.
+      </p></div> 
+      <h1>CRYPTO AND CURRENCY TABLE</h1>
+      <section>
+        <table class="conv-table">
+          <thead>
+          <tr>{% for col in trend_col %}
+          <th>{{col}}</th>
+          {% endfor %}</tr>
+        </thead>
+        <tbody>
+          {% for row in trend_row %}
+          <tr>
+          {% for col, row_ in zip(trend_col, row) %}
+          {% if col==pic %}
+          <td>
+            <img src = "{{ url_for('static', filename='colors/'+row_)}} " width="40px" height="40px">
+          </td>
+          {% else %}
+          <td>{{row_}}</td>
+          {% endif %}
+          {% endfor %}
+          </tr>{% endfor %}
+        </tbody>
+        </table> 
+      </section>
+
+      <script>
+        var x, i, j, l, ll, selElmnt, a, b, c;
+      /* Look for any elements with the class "custom-select": */
+      x = document.getElementsByClassName("custom-select");
+      l = x.length;
+      for (i = 0; i < l; i++) {
+        selElmnt = x[i].getElementsByTagName("select")[0];
+        ll = selElmnt.length;
+        /* For each element, create a new DIV that will act as the selected item: */
+        a = document.createElement("DIV");
+        a.setAttribute("class", "select-selected");
+        a.innerHTML = selElmnt.options[selElmnt.selectedIndex].innerHTML;
+        x[i].appendChild(a);
+        /* For each element, create a new DIV that will contain the option list: */
+        b = document.createElement("DIV");
+        b.setAttribute("class", "select-items select-hide");
+        for (j = 1; j < ll; j++) {
+          /* For each option in the original select element,
+          create a new DIV that will act as an option item: */
+          c = document.createElement("DIV");
+          c.innerHTML = selElmnt.options[j].innerHTML;
+          c.addEventListener("click", function(e) {
+              /* When an item is clicked, update the original select box,
+              and the selected item: */
+            
+              var y, i, k, s, h, sl, yl;
+              s = this.parentNode.parentNode.getElementsByTagName("select")[0];
+              sl = s.length;
+              h = this.parentNode.previousSibling;
+              for (i = 0; i < sl; i++) {
+                if (s.options[i].innerHTML == this.innerHTML) {
+                  s.selectedIndex = i;
+                  h.innerHTML = this.innerHTML;
+                  y = this.parentNode.getElementsByClassName("same-as-selected");
+                  yl = y.length;
+                  for (k = 0; k < yl; k++) {
+                    y[k].removeAttribute("class");
+                  }
+                  this.setAttribute("class", "same-as-selected");
+                  break;
+                }
+              }
+              h.click();
+              myform.submit()
+          });
+          b.appendChild(c);
+        }
+        x[i].appendChild(b);
+        a.addEventListener("click", function(e) {
+          /* When the select box is clicked, close any other select boxes,
+          and open/close the current select box: */
+         
+          e.stopPropagation();
+          closeAllSelect(this);
+          this.nextSibling.classList.toggle("select-hide");
+          this.classList.toggle("select-arrow-active");
+        });
+      }
+      
+      function closeAllSelect(elmnt) {
+        /* A function that will close all select boxes in the document,
+        except the current select box: */
+        var x, y, i, xl, yl, arrNo = [];
+        x = document.getElementsByClassName("select-items");
+        y = document.getElementsByClassName("select-selected");
+        xl = x.length;
+        yl = y.length;
+        for (i = 0; i < yl; i++) {
+          if (elmnt == y[i]) {
+            arrNo.push(i)
+          } else {
+            y[i].classList.remove("select-arrow-active");
+          }
+        }
+        for (i = 0; i < xl; i++) {
+          if (arrNo.indexOf(i)) {
+            x[i].classList.add("select-hide");
+          }
+        }
+      }
+      
+      /* If the user clicks anywhere outside the select box,
+      then close all select boxes: */
+      document.addEventListener("click", closeAllSelect);
+      </script>
+
+</div>
+<br>
+{% endblock %}
