@@ -6,3 +6,4 @@ datetime
 plotly
 numerize
 requests 
+gunicorn
