@@ -156,7 +156,7 @@ font-size: 22px;
 }
 .model {
     width: 45%;
-    height:370px;
+    height:45%;
     margin: 30px;
     display: flex;
     justify-content: center;
@@ -191,7 +191,7 @@ font-size: 22px;
 }
 #arima {
     background-image: url(/static/arima.png);
-    height:370px;
+    height:50lvh;
     width:45%;
     background-size:100%;
     background-repeat: no-repeat;
@@ -202,7 +202,7 @@ font-size: 22px;
 }
 #linear {
     background-image: url(/static/linear-reg.png);
-    height:370px;
+    height:50lvh;
     width:45%;
     background-size:100%;
     background-repeat: no-repeat;
@@ -213,7 +213,7 @@ font-size: 22px;
 }
 #lstm {
     background-image: url(/static/lstm.png);
-    height:370px;
+    height:50lvh;
     width:45%;
     background-size:100%;
     background-repeat: no-repeat;
@@ -224,7 +224,7 @@ font-size: 22px;
 }
 #avg {
     background-image: url(/static/moving-avg.png);
-    height:370px;
+    height:50lvh;
     width:45%;
     background-size:100%;
     background-repeat: no-repeat;

@@ -90,7 +90,7 @@
   border: 3px solid #ea8b19;
   font-size: 18px;
   color: white;
-  width: 250px;
+  width: 15vw;
   position: relative;
   margin:-10px 0px 25px 0px;
 }
@@ -152,6 +152,10 @@
   border-radius: 10px;
   background-color: #ea8b19;
 }
+.drop-list{
+  margin-left: 4vw;
+}
+
 
 .FixHead {
   background-color: black;
@@ -539,7 +543,7 @@ font-size: 22px;
 /* convert css */
   .r-grid{
     background-color: rgb(17, 17,17);
-    width: 45%;
+    width:50vw;
     height: 320px;
     align-items: center;
     text-align: center;
