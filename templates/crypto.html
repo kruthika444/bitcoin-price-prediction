@@ -30,7 +30,7 @@
            <form class='chart-drop-menu' name="myform" action="{{ url_for('crypto')}}" method="post">
             <div class="custom-select">
             <select name="chart">
-              <option value="">Select</option>
+              <option value="">Select a Crypto</option>
           {% for row in row_dd %}
             <option value={{row[0]}}>{{row[1]}} </option> 
           {% endfor %}

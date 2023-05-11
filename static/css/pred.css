@@ -184,6 +184,7 @@ font-size: 22px;
 .model:hover {
     box-shadow: 0 0 0 5px inset, 0 0 5px grey, 0 0 10px grey inset;
     transition: box-shadow 1s;
+    cursor: pointer;
 }
 .model:hover::after {
     opacity: 0;
@@ -235,7 +236,7 @@ font-size: 22px;
 }
 #wrapper {
     width:100%;
-    height: 800px;
+     height:110lvh;
     justify-content: center;
     align-items: center;
     margin: 50px;
