@@ -156,7 +156,7 @@ font-size: 22px;
 }
 .model {
     width: 45%;
-    height:45%;
+     height:50lvh;
     margin: 30px;
     display: flex;
     justify-content: center;
@@ -168,7 +168,7 @@ font-size: 22px;
 }
 .model::after {
     width: 90%;
-    height: 90%;
+     height:50lvh;
     display: block;
     white-space: pre;
     font-size: 22px;

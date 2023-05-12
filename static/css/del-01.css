@@ -230,14 +230,14 @@ margin-bottom: 300px;
     background-color:rgb(30, 30, 30);
     color: white;
     height:73px;
-    width:60vw;
+    width:65vw;
     top:3px;
     text-align: right;
     margin-top:18px;
     padding-left:40%;
 } 
 nav li:nth-child(1){
-  margin-left:12vw;
+  margin-left:10vw;
 }
 nav li{
     float: left;
